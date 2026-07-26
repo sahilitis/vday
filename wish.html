@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Make a Wish — Vasvi's Day</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  .page-head{ text-align:center; margin-bottom:1rem; }
+  .page-head h1{ font-size:clamp(2.2rem,5vw,3.2rem); }
+  .page-head p{ font-family:'Quicksand',sans-serif; opacity:0.8; max-width:52ch; margin:0.4rem auto 0; }
+
+  .cake-stage{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    margin-top:2rem;
+  }
+
+  .cake{
+    cursor:pointer;
+    width:min(80vw, 280px);
+  }
+
+  .flame{
+    transform-origin:center bottom;
+    animation:flicker 1.4s ease-in-out infinite alternate;
+  }
+  @keyframes flicker{
+    0%{ transform:scaleY(1) translateX(0); }
+    50%{ transform:scaleY(1.08) translateX(1px); }
+    100%{ transform:scaleY(0.95) translateX(-1px); }
+  }
+  .flame.out{ opacity:0; animation:none; }
+
+  .instructions{
+    font-family:'Caveat', cursive;
+    font-size:1.5rem;
+    color:var(--blue-dk);
+    margin-top:1.2rem;
+    text-align:center;
+  }
+
+  .wish-message{
+    max-width:600px;
+    margin:2.4rem auto 0;
+    padding:2.2rem;
+    text-align:center;
+    opacity:0;
+    transform:translateY(15px);
+    transition:opacity .6s ease, transform .6s ease;
+  }
+  .wish-message.show{ opacity:1; transform:translateY(0); }
+  .wish-message p{
+    font-family:'Homemade Apple', cursive;
+    font-size:1.6rem;
+    color:var(--ink);
+    line-height:1.6;
+    margin:0;
+  }
+  .wish-message .sign{
+    display:block;
+    margin-top:0.8rem;
+    font-family:'Caveat', cursive;
+    font-size:1.8rem;
+    color:var(--blue-dk);
+  }
+
+  .final-stamp{
+    display:flex;
+    justify-content:center;
+    margin-top:2rem;
+  }
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="index.html" class="brand">🌻 Vasvi's Day</a>
+  <ul>
+    <li><a class="nav-link" href="index.html">Home</a></li>
+    <li><a class="nav-link" href="letter.html">The Letter</a></li>
+    <li><a class="nav-link" href="moments.html">Our Moments</a></li>
+    <li><a class="nav-link" href="sunflowers.html">Sunflower Field</a></li>
+    <li><a class="nav-link" href="jojo.html">Her Playlist</a></li>
+    <li><a class="nav-link" href="brownies.html">10/10 Archive</a></li>
+    <li><a class="nav-link" href="poem.html">For You</a></li>
+    <li><a class="nav-link active" href="wish.html">Make a Wish</a></li>
+  </ul>
+</nav>
+
+<main>
+  <div class="page-head">
+    <p class="eyebrow">the grand finale</p>
+    <h1>Make a Wish 🕯️</h1>
+    <p>One candle. One wish. Try not to think about the calories in the cake while you do it.</p>
+  </div>
+
+  <div class="cake-stage">
+    <svg class="cake" id="cake" viewBox="0 0 260 240" xmlns="http://www.w3.org/2000/svg">
+      <!-- candle -->
+      <rect x="122" y="30" width="16" height="50" rx="3" fill="#F0938E"/>
+      <g id="flameGroup">
+        <path class="flame" d="M130 8 C124 18, 122 26, 130 32 C138 26, 136 18, 130 8 Z" fill="#F2B705"/>
+        <path class="flame" d="M130 14 C127 20, 126 25, 130 28 C134 25, 133 20, 130 14 Z" fill="#F0938E" opacity="0.85"/>
+      </g>
+      <!-- top tier -->
+      <rect x="70" y="80" width="120" height="55" rx="6" fill="#A9C8E0"/>
+      <rect x="70" y="80" width="120" height="14" rx="6" fill="#FBF6EA" opacity="0.7"/>
+      <!-- drips -->
+      <circle cx="90" cy="135" r="8" fill="#F2B705"/>
+      <circle cx="130" cy="138" r="9" fill="#F0938E"/>
+      <circle cx="168" cy="135" r="8" fill="#F2B705"/>
+      <!-- bottom tier -->
+      <rect x="40" y="140" width="180" height="70" rx="6" fill="#2F5D8A"/>
+      <rect x="40" y="140" width="180" height="14" rx="6" fill="#FBF6EA" opacity="0.55"/>
+      <!-- base plate -->
+      <ellipse cx="130" cy="216" rx="110" ry="12" fill="#6B4226" opacity="0.25"/>
+      <!-- sunflower decorations -->
+      <g transform="translate(60,165)">
+        <g fill="#F2B705">
+          <ellipse cx="0" cy="-8" rx="3" ry="6"/>
+          <ellipse cx="0" cy="8" rx="3" ry="6"/>
+          <ellipse cx="8" cy="0" rx="6" ry="3"/>
+          <ellipse cx="-8" cy="0" rx="6" ry="3"/>
+        </g>
+        <circle cx="0" cy="0" r="5" fill="#6B4226"/>
+      </g>
+      <g transform="translate(200,165)">
+        <g fill="#F2B705">
+          <ellipse cx="0" cy="-8" rx="3" ry="6"/>
+          <ellipse cx="0" cy="8" rx="3" ry="6"/>
+          <ellipse cx="8" cy="0" rx="6" ry="3"/>
+          <ellipse cx="-8" cy="0" rx="6" ry="3"/>
+        </g>
+        <circle cx="0" cy="0" r="5" fill="#6B4226"/>
+      </g>
+    </svg>
+    <p class="instructions" id="instr">click the candle to blow it out</p>
+  </div>
+
+  <div class="wish-message paper-card" id="wishMsg">
+    <p>Whatever you wished for — I hope it's already halfway true. And if it wasn't dessert, wish again, because that feels like a missed opportunity.</p>
+    <p>Happy birthday, Vasvi. Here's to another year of 10/10 everything.</p>
+    <span class="sign">— Sahil 🌻</span>
+  </div>
+
+  <div class="final-stamp" id="finalStamp" style="display:none;">
+    <div class="stamp">10/10<span>officially 1 yr wiser</span></div>
+  </div>
+</main>
+
+<footer class="site-footer">back to the <a href="index.html">start</a>, or just sit here and feel special for a bit 🌻</footer>
+
+<script src="confetti.js"></script>
+<script>
+  const cake = document.getElementById('cake');
+  const instr = document.getElementById('instr');
+  const wishMsg = document.getElementById('wishMsg');
+  const finalStamp = document.getElementById('finalStamp');
+  let blown = false;
+
+  cake.addEventListener('click', () => {
+    if(blown) return;
+    blown = true;
+    document.querySelectorAll('.flame').forEach(f => f.classList.add('out'));
+    instr.textContent = "wish made. no refunds or takebacks.";
+    launchConfetti(document.body, {count:80});
+    setTimeout(()=>{
+      wishMsg.classList.add('show');
+      finalStamp.style.display = 'flex';
+      wishMsg.scrollIntoView({behavior:'smooth', block:'center'});
+    }, 500);
+  });
+</script>
+
+</body>
+</html>

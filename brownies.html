@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The 10/10 Archive — Vasvi's Day</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  .page-head{ text-align:center; margin-bottom:0.5rem; }
+  .page-head h1{ font-size:clamp(2.2rem,5vw,3.2rem); }
+  .page-head p{ font-family:'Quicksand',sans-serif; opacity:0.8; max-width:56ch; margin:0.4rem auto 0; }
+
+  .bureau-banner{
+    text-align:center;
+    font-family:'Caveat', cursive;
+    color:var(--brown);
+    font-size:1.3rem;
+    margin:1rem 0 2.2rem;
+  }
+
+  .archive-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(230px, 1fr));
+    gap:1.4rem;
+  }
+  .archive-card{
+    padding:1.6rem 1.5rem;
+    position:relative;
+    overflow:hidden;
+  }
+  .archive-card .file-num{
+    font-family:'Quicksand',sans-serif;
+    font-size:0.7rem;
+    letter-spacing:0.12em;
+    color:var(--brown);
+    text-transform:uppercase;
+    font-weight:700;
+  }
+  .archive-card h3{
+    font-size:1.7rem;
+    margin:0.3rem 0 0.5rem;
+  }
+  .archive-card p{
+    font-family:'Quicksand',sans-serif;
+    font-size:0.88rem;
+    color:var(--ink);
+    opacity:0.85;
+    margin:0 0 1rem;
+    line-height:1.4;
+  }
+  .archive-card .stamp{
+    position:absolute;
+    bottom:-14px;
+    right:-10px;
+    width:76px;
+    height:76px;
+    font-size:1.3rem;
+  }
+
+  .rate-tool{
+    margin-top:3rem;
+    padding:2.2rem;
+    text-align:center;
+  }
+  .rate-tool h2{ font-size:1.9rem; margin-bottom:0.4rem; }
+  .rate-tool p.sub{
+    font-family:'Quicksand',sans-serif;
+    opacity:0.8;
+    margin-bottom:1.4rem;
+    font-size:0.9rem;
+  }
+  #rateInput{
+    font-family:'Quicksand',sans-serif;
+    font-size:1rem;
+    padding:0.7rem 1rem;
+    border-radius:999px;
+    border:2px solid var(--blue-lt);
+    width:min(90%, 320px);
+    margin-right:0.5rem;
+    outline:none;
+  }
+  #rateInput:focus{ border-color:var(--blue); }
+  .rate-result{
+    margin-top:1.4rem;
+    font-family:'Caveat', cursive;
+    font-size:1.6rem;
+    color:var(--blue-dk);
+    min-height:2rem;
+  }
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="index.html" class="brand">🌻 Vasvi's Day</a>
+  <ul>
+    <li><a class="nav-link" href="index.html">Home</a></li>
+    <li><a class="nav-link" href="letter.html">The Letter</a></li>
+    <li><a class="nav-link" href="moments.html">Our Moments</a></li>
+    <li><a class="nav-link" href="sunflowers.html">Sunflower Field</a></li>
+    <li><a class="nav-link" href="jojo.html">Her Playlist</a></li>
+    <li><a class="nav-link active" href="brownies.html">10/10 Archive</a></li>
+    <li><a class="nav-link" href="poem.html">For You</a></li>
+    <li><a class="nav-link" href="wish.html">Make a Wish</a></li>
+  </ul>
+</nav>
+
+<main>
+  <div class="page-head">
+    <p class="eyebrow">est. every time we've eaten together</p>
+    <h1>The Official 10/10 Archive 🍫</h1>
+    <p>A government-grade record of every food, moment, and questionable decision I've personally rated a perfect score where you're involved. Peer reviewed by nobody. Accuracy: unquestionable.</p>
+  </div>
+  <p class="bureau-banner">— filed by Sahil, Chief Rating Officer, Brownie & Vasvi Rating Bureau, est. always —</p>
+
+  <div class="archive-grid" id="archiveGrid"></div>
+
+  <section class="rate-tool paper-card">
+    <h2>Try the Official Rating Machine</h2>
+    <p class="sub">Type anything. Watch it fail to score below a 10.</p>
+    <div>
+      <input id="rateInput" type="text" placeholder="e.g. Monday morning traffic" />
+      <button class="btn sun" id="rateBtn">Rate it</button>
+    </div>
+    <p class="rate-result" id="rateResult"></p>
+  </section>
+</main>
+
+<footer class="site-footer">last stop: make a wish 🕯️</footer>
+
+<script>
+const files = [
+  {title:"Wednesday — our day", note:"Kalsang for momos, Wongdhen for dessert after. Ordinary Wednesday, extraordinary rating."},
+  {title:"Andhra Bhavan biryani", note:"Your recommendation, your win. Filed permanently under 'she was right.'"},
+  {title:"Every dessert menu, read end to end", note:"Even the ones with three items. Thoroughness is a love language."},
+  {title:"The birthday brownie about to happen", note:"Pending. Confidence level: extremely high."}
+];
+
+const grid = document.getElementById('archiveGrid');
+files.forEach((f,i)=>{
+  const card = document.createElement('div');
+  card.className = 'archive-card paper-card';
+  card.innerHTML = `
+    <span class="file-num">Case file #${String(i+1).padStart(3,'0')}</span>
+    <h3>${f.title}</h3>
+    <p>${f.note}</p>
+    <div class="stamp">10/10<span>verified</span></div>
+  `;
+  grid.appendChild(card);
+});
+
+document.getElementById('rateBtn').addEventListener('click', rateIt);
+document.getElementById('rateInput').addEventListener('keydown', (e)=>{ if(e.key==='Enter') rateIt(); });
+
+function rateIt(){
+  const val = document.getElementById('rateInput').value.trim();
+  const result = document.getElementById('rateResult');
+  if(!val){
+    result.textContent = "you have to actually type something, that's how rating works";
+    return;
+  }
+  result.textContent = `"${val}" — 10/10. Verified by the Bureau. No appeals.`;
+}
+</script>
+
+</body>
+</html>

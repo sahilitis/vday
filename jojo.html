@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vasvi's JoJo Radio</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  .page-head{ text-align:center; margin-bottom:2rem; }
+  .page-head h1{ font-size:clamp(2.2rem,5vw,3.2rem); }
+  .page-head p{ font-family:'Quicksand',sans-serif; opacity:0.8; max-width:52ch; margin:0.4rem auto 0; }
+
+  .player{
+    max-width:460px;
+    margin:0 auto;
+    background:var(--blue-dk);
+    border-radius:20px;
+    padding:1.8rem;
+    box-shadow:0 20px 45px rgba(30,62,92,0.35);
+    position:relative;
+  }
+  .player::before{
+    content:"📻 VASVI FM — 100% VOLUME ONLY";
+    display:block;
+    text-align:center;
+    font-family:'Quicksand',sans-serif;
+    font-size:0.7rem;
+    letter-spacing:0.1em;
+    color:var(--blue-lt);
+    margin-bottom:1rem;
+  }
+  .cassette{
+    background:var(--paper);
+    border-radius:10px;
+    padding:1.4rem 1.2rem;
+    position:relative;
+    overflow:hidden;
+  }
+  .cassette .reels{
+    display:flex;
+    justify-content:space-between;
+    padding:0 1.6rem;
+    margin-bottom:0.8rem;
+  }
+  .reel{
+    width:52px; height:52px;
+    border-radius:50%;
+    background:radial-gradient(circle, var(--blue) 0 8px, var(--blue-lt) 9px 12px, transparent 13px),
+               repeating-conic-gradient(var(--brown) 0deg 30deg, #8a5c37 30deg 60deg);
+    animation:spin 3s linear infinite;
+    animation-play-state:paused;
+  }
+  .cassette.playing .reel{ animation-play-state:running; }
+  @keyframes spin{ to{ transform:rotate(360deg); } }
+
+  .track-label{
+    text-align:center;
+    font-family:'Caveat', cursive;
+    font-size:1.4rem;
+    color:var(--blue-dk);
+    min-height:1.6rem;
+  }
+
+  .controls{
+    display:flex;
+    justify-content:center;
+    gap:1rem;
+    margin-top:1.4rem;
+  }
+  .ctrl-btn{
+    background:var(--sun);
+    border:none;
+    width:52px; height:52px;
+    border-radius:50%;
+    font-size:1.2rem;
+    cursor:pointer;
+    box-shadow:0 4px 10px rgba(0,0,0,0.25);
+    transition:transform .15s ease;
+  }
+  .ctrl-btn:hover{ transform:scale(1.08); }
+  .ctrl-btn:active{ transform:scale(0.94); }
+
+  .playlist{
+    margin-top:2.6rem;
+  }
+  .playlist h2{ text-align:center; font-size:1.9rem; margin-bottom:1rem; }
+  .track-list{
+    list-style:none;
+    padding:0;
+    margin:0;
+    max-width:560px;
+    margin:0 auto;
+    display:flex;
+    flex-direction:column;
+    gap:0.7rem;
+  }
+  .track-list li{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0.85rem 1.2rem;
+    font-family:'Quicksand',sans-serif;
+    font-weight:600;
+    cursor:pointer;
+    transition:background .2s ease;
+  }
+  .track-list li:hover{ background:rgba(47,93,138,0.08); }
+  .track-list li .num{ color:var(--blue); font-weight:700; margin-right:0.6rem; }
+  .track-list li .badge{
+    font-family:'Caveat', cursive;
+    color:var(--blush);
+    font-size:1rem;
+  }
+
+  .karaoke-note{
+    margin-top:2.6rem;
+    max-width:600px;
+    margin-left:auto;
+    margin-right:auto;
+    padding:1.8rem 2rem;
+    text-align:center;
+  }
+  .karaoke-note p{
+    font-family:'Homemade Apple', cursive;
+    font-size:1.4rem;
+    color:var(--ink);
+    margin:0;
+  }
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="index.html" class="brand">🌻 Vasvi's Day</a>
+  <ul>
+    <li><a class="nav-link" href="index.html">Home</a></li>
+    <li><a class="nav-link" href="letter.html">The Letter</a></li>
+    <li><a class="nav-link" href="moments.html">Our Moments</a></li>
+    <li><a class="nav-link" href="sunflowers.html">Sunflower Field</a></li>
+    <li><a class="nav-link active" href="jojo.html">Her Playlist</a></li>
+    <li><a class="nav-link" href="brownies.html">10/10 Archive</a></li>
+    <li><a class="nav-link" href="poem.html">For You</a></li>
+    <li><a class="nav-link" href="wish.html">Make a Wish</a></li>
+  </ul>
+</nav>
+
+<main>
+  <div class="page-head">
+    <p class="eyebrow">genuinely great taste, no notes</p>
+    <h1>Vasvi's Playlist 🎧</h1>
+    <p>For the girl who lets songs say what she won't. This is a simulation of the real thing — press play and imagine every one of these actually playing.</p>
+  </div>
+
+  <div class="player">
+    <div class="cassette" id="cassette">
+      <div class="reels">
+        <div class="reel"></div>
+        <div class="reel"></div>
+      </div>
+      <div class="track-label" id="trackLabel">press play, Vasvi</div>
+    </div>
+    <div class="controls">
+      <button class="ctrl-btn" id="prevBtn" aria-label="previous track">⏮</button>
+      <button class="ctrl-btn" id="playBtn" aria-label="play or pause">▶</button>
+      <button class="ctrl-btn" id="nextBtn" aria-label="next track">⏭</button>
+    </div>
+  </div>
+
+  <section class="playlist">
+    <h2>Tonight's Setlist</h2>
+    <ul class="track-list" id="trackList">
+      <!-- populated by JS -->
+    </ul>
+  </section>
+
+  <section class="karaoke-note paper-card">
+    <p>Somewhere, right now, a car window is rolled up specifically so you can belt out a JoJo chorus in peace. That car is a 10/10 vibe. You are the whole show.</p>
+  </section>
+</main>
+
+<footer class="site-footer">next stop: the 10/10 archive, obviously 🍫</footer>
+
+<script>
+  const tracks = [
+    {title:"Isharey", artist:"AtharvaMusic, Sarodi Bohra"},
+    {title:"The Pool", artist:"Stephen Sanchez"},
+    {title:"Die for You", artist:"Joji"},
+    {title:"Aayat", artist:"Akshiti Chourey, Chapter6, Zaiff"},
+    {title:"Idhar Zara Sa Dekh Lo", artist:"Shikhar, Yashika Sikka"}
+  ];
+
+  const trackList = document.getElementById('trackList');
+  tracks.forEach((t,i)=>{
+    const li = document.createElement('li');
+    li.innerHTML = `<span><span class="num">${String(i+1).padStart(2,'0')}</span>${t.title} <span style="opacity:0.6; font-weight:500;">— ${t.artist}</span></span><span class="badge">10/10</span>`;
+    li.addEventListener('click', ()=> setTrack(i));
+    trackList.appendChild(li);
+  });
+
+  const cassette = document.getElementById('cassette');
+  const trackLabel = document.getElementById('trackLabel');
+  const playBtn = document.getElementById('playBtn');
+  let current = 0;
+  let playing = false;
+
+  function setTrack(i){
+    current = ((i % tracks.length) + tracks.length) % tracks.length;
+    trackLabel.textContent = "now playing: " + tracks[current].title + ' — ' + tracks[current].artist;
+    if(!playing) togglePlay();
+  }
+
+  function togglePlay(){
+    playing = !playing;
+    cassette.classList.toggle('playing', playing);
+    playBtn.textContent = playing ? '⏸' : '▶';
+    if(playing && trackLabel.textContent === 'press play, Vasvi'){
+      trackLabel.textContent = "now playing: " + tracks[current].title + ' — ' + tracks[current].artist;
+    }
+  }
+
+  playBtn.addEventListener('click', togglePlay);
+  document.getElementById('nextBtn').addEventListener('click', ()=> setTrack(current+1));
+  document.getElementById('prevBtn').addEventListener('click', ()=> setTrack(current-1));
+</script>
+
+</body>
+</html>

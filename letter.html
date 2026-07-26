@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Letter for Vasvi</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  .stage{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding-top:1.5rem;
+  }
+  .instructions{
+    font-family:'Caveat', cursive;
+    font-size:1.5rem;
+    color:var(--blue-dk);
+    margin-bottom:1.6rem;
+    text-align:center;
+  }
+
+  .envelope-wrap{
+    position:relative;
+    width:min(90vw, 420px);
+    height:280px;
+    cursor:pointer;
+    perspective:1000px;
+  }
+  .envelope-body{
+    position:absolute;
+    inset:0;
+    background:var(--blue);
+    border-radius:8px;
+    box-shadow:0 18px 40px rgba(30,62,92,0.35);
+  }
+  .envelope-body::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+      linear-gradient(rgba(255,255,255,0.06), rgba(255,255,255,0.06));
+    border-radius:8px;
+  }
+  .flap{
+    position:absolute;
+    top:0; left:0; right:0;
+    height:0;
+    border-left:210px solid transparent;
+    border-right:210px solid transparent;
+    border-top:150px solid var(--blue-dk);
+    transform-origin:top;
+    transition:transform 0.8s cubic-bezier(.6,-0.28,.74,.05);
+    z-index:5;
+  }
+  .envelope-wrap.open .flap{
+    transform:rotateX(180deg);
+  }
+  .seal{
+    position:absolute;
+    top:105px;
+    left:50%;
+    transform:translateX(-50%);
+    width:56px;
+    height:56px;
+    background:var(--blush);
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'Caveat',cursive;
+    font-weight:700;
+    color:#fff;
+    font-size:1.3rem;
+    box-shadow:0 4px 10px rgba(0,0,0,0.25);
+    z-index:6;
+    transition:opacity .4s ease, transform .4s ease;
+  }
+  .envelope-wrap.open .seal{
+    opacity:0;
+    transform:translateX(-50%) scale(0.4) rotate(30deg);
+  }
+  .hint-text{
+    position:absolute;
+    bottom:20px;
+    width:100%;
+    text-align:center;
+    color:#fff;
+    font-family:'Quicksand',sans-serif;
+    font-size:0.85rem;
+    opacity:0.85;
+    z-index:4;
+  }
+  .envelope-wrap.open .hint-text{ opacity:0; }
+
+  .letter-paper{
+    max-width:640px;
+    margin:2.5rem auto 0;
+    padding:3rem 2.6rem;
+    background:
+      repeating-linear-gradient(var(--paper) 0px, var(--paper) 33px, rgba(47,93,138,0.13) 34px);
+    background-color:var(--paper);
+    border-radius:4px;
+    box-shadow:0 20px 45px rgba(30,62,92,0.22);
+    position:relative;
+    opacity:0;
+    transform:translateY(30px);
+    transition:opacity .7s ease, transform .7s ease;
+    line-height:34px;
+  }
+  .letter-paper.show{
+    opacity:1;
+    transform:translateY(0);
+  }
+  .letter-paper::before{
+    content:"";
+    position:absolute;
+    left:56px;
+    top:0;
+    bottom:0;
+    width:1.5px;
+    background:rgba(240,147,142,0.5);
+  }
+  .letter-paper p, .letter-paper .greet, .letter-paper .sign{
+    font-family:'Homemade Apple', cursive;
+    font-size:1.45rem;
+    color:var(--ink);
+    margin:0 0 0px;
+  }
+  .letter-paper .greet{ font-size:1.9rem; color:var(--blue-dk); }
+  .letter-paper .sign{
+    margin-top:10px;
+    display:block;
+    font-size:1.8rem;
+    color:var(--blue-dk);
+  }
+  .corner-stamp{
+    position:absolute;
+    top:20px;
+    right:24px;
+  }
+
+  @media (max-width:640px){
+    .flap{ border-left:calc(min(90vw,420px)/2) solid transparent; border-right:calc(min(90vw,420px)/2) solid transparent; }
+    .letter-paper{ padding:2.2rem 1.4rem; line-height:30px;}
+    .letter-paper p, .letter-paper .greet, .letter-paper .sign{ font-size:1.25rem;}
+  }
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="index.html" class="brand">🌻 Vasvi's Day</a>
+  <ul>
+    <li><a class="nav-link" href="index.html">Home</a></li>
+    <li><a class="nav-link active" href="letter.html">The Letter</a></li>
+    <li><a class="nav-link" href="moments.html">Our Moments</a></li>
+    <li><a class="nav-link" href="sunflowers.html">Sunflower Field</a></li>
+    <li><a class="nav-link" href="jojo.html">Her Playlist</a></li>
+    <li><a class="nav-link" href="brownies.html">10/10 Archive</a></li>
+    <li><a class="nav-link" href="poem.html">For You</a></li>
+    <li><a class="nav-link" href="wish.html">Make a Wish</a></li>
+  </ul>
+</nav>
+
+<main>
+  <div class="stage">
+    <p class="instructions">You've got mail. Yes, actually click it. 👇</p>
+
+    <div class="envelope-wrap" id="envelope">
+      <div class="envelope-body"></div>
+      <div class="flap"></div>
+      <div class="seal">S+V</div>
+      <div class="hint-text">tap to break the seal</div>
+    </div>
+
+    <article class="letter-paper" id="letterPaper">
+      <div class="corner-stamp"><div class="stamp">10/10<span>no notes</span></div></div>
+      <p class="greet">My Vasvi,</p>
+      <p>&nbsp;</p>
+      <p>Happy birthday to the girl I've rated a 10/10 since day one — every meal, every ordinary Tuesday, every ridiculous little moment we've shared gets the exact same score from me. You're just built that way.</p>
+      <p>&nbsp;</p>
+      <p>You walked in loving sunflowers, JoJo blasting in your ears, blue as your whole personality, and a dessert menu like it owed you money. I didn't stand a chance.</p>
+      <p>&nbsp;</p>
+      <p>So here's a whole website, because apparently a normal message wasn't dramatic enough for you. You're welcome. Go click on things.</p>
+      <p>&nbsp;</p>
+      <p>Every single moment with you, I've marked a 10/10 in my head without even trying. Today's no different. I hope this year gives you everything that deserves the same score.</p>
+      <p>&nbsp;</p>
+      <span class="sign">— forever your Sahil 🌻</span>
+    </article>
+  </div>
+</main>
+
+<footer class="site-footer">psst — the next page has flowers with secrets in them 🌻</footer>
+
+<script>
+  const envelope = document.getElementById('envelope');
+  const letter = document.getElementById('letterPaper');
+  envelope.addEventListener('click', () => {
+    if(envelope.classList.contains('open')) return;
+    envelope.classList.add('open');
+    setTimeout(()=>{
+      letter.classList.add('show');
+      letter.scrollIntoView({behavior:'smooth', block:'center'});
+    }, 500);
+  });
+</script>
+
+</body>
+</html>

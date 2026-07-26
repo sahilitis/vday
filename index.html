@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Vasvi 🌻</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  .hero{
+    display:grid;
+    grid-template-columns:1.1fr 1fr;
+    gap:2rem;
+    align-items:center;
+    padding:3rem 0 2rem;
+  }
+  @media (max-width:800px){ .hero{grid-template-columns:1fr; text-align:center;} }
+
+  .hero h1{
+    font-size:clamp(2.8rem, 6vw, 4.6rem);
+    line-height:1.05;
+    margin-bottom:0.5rem;
+  }
+  .hero p.sub{
+    font-family:'Quicksand',sans-serif;
+    font-size:1.1rem;
+    max-width:38ch;
+    color:var(--ink);
+    opacity:0.85;
+    margin-bottom:1.6rem;
+  }
+  @media (max-width:800px){ .hero p.sub{ margin-left:auto; margin-right:auto;} }
+
+  .hero-actions{display:flex; gap:0.9rem; flex-wrap:wrap;}
+  @media (max-width:800px){ .hero-actions{justify-content:center;} }
+
+  .sun-field{
+    position:relative;
+    height:340px;
+  }
+  .sunflower-hero{
+    position:absolute;
+    animation: sway 4.5s ease-in-out infinite;
+    transform-origin:bottom center;
+  }
+  .sunflower-hero.s1{ left:10%; top:10%; width:150px; animation-delay:0s;}
+  .sunflower-hero.s2{ left:45%; top:40%; width:190px; animation-delay:0.6s;}
+  .sunflower-hero.s3{ left:70%; top:0%; width:120px; animation-delay:1.1s;}
+  @keyframes sway{
+    0%,100%{ transform:rotate(-3deg); }
+    50%{ transform:rotate(3deg); }
+  }
+
+  .floating-stamp{
+    position:absolute;
+    top:-10px;
+    right:0;
+  }
+  @media (max-width:800px){ .floating-stamp{ position:static; margin:1rem auto 0; } }
+
+  .card-row{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:1.3rem;
+    margin-top:3rem;
+  }
+  @media (max-width:760px){ .card-row{grid-template-columns:1fr;} }
+
+  .mini-card{
+    padding:1.6rem 1.4rem;
+    text-decoration:none;
+    display:block;
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .mini-card:hover{ transform:translateY(-5px) rotate(-0.5deg); }
+  .mini-card .emoji{ font-size:2.1rem; }
+  .mini-card h3{ font-size:1.7rem; margin:0.4rem 0 0.3rem; }
+  .mini-card p{ font-family:'Quicksand',sans-serif; font-size:0.9rem; color:var(--ink); opacity:0.8; margin:0;}
+
+  .intro-note{
+    margin-top:3.2rem;
+    padding:2rem;
+    text-align:center;
+  }
+  .intro-note p{
+    font-family:'Homemade Apple', cursive;
+    font-size:1.5rem;
+    line-height:1.6;
+    color:var(--blue-dk);
+  }
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="index.html" class="brand">🌻 Vasvi's Day</a>
+  <ul>
+    <li><a class="nav-link active" href="index.html">Home</a></li>
+    <li><a class="nav-link" href="letter.html">The Letter</a></li>
+    <li><a class="nav-link" href="moments.html">Our Moments</a></li>
+    <li><a class="nav-link" href="sunflowers.html">Sunflower Field</a></li>
+    <li><a class="nav-link" href="jojo.html">Her Playlist</a></li>
+    <li><a class="nav-link" href="brownies.html">10/10 Archive</a></li>
+    <li><a class="nav-link" href="poem.html">For You</a></li>
+    <li><a class="nav-link" href="wish.html">Make a Wish</a></li>
+  </ul>
+</nav>
+
+<main>
+  <section class="hero">
+    <div style="position:relative;">
+      <p class="eyebrow">A whole website. Just for you. Obviously.</p>
+      <h1>Happy Birthday,<br>Vasvi! 🎂</h1>
+      <p class="sub">Blue skies, sunflowers, a slightly unhinged amount of brownies, and every moment I've ever rated 10/10 with you — all in one place, because a text message felt too small for this occasion.</p>
+      <div class="hero-actions">
+        <a href="letter.html" class="btn">Open your letter 💌</a>
+        <a href="wish.html" class="btn sun">Make a wish 🕯️</a>
+      </div>
+      <div class="floating-stamp">
+        <div class="stamp">10/10<span>day one</span></div>
+      </div>
+    </div>
+
+    <div class="sun-field" aria-hidden="true">
+      <svg class="sunflower-hero s1" viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg">
+        <line x1="50" y1="70" x2="50" y2="140" stroke="#4a7a3d" stroke-width="4"/>
+        <g transform="translate(50,55)">
+          <g fill="#F2B705">
+            <ellipse cx="0" cy="-32" rx="9" ry="20"/>
+            <ellipse cx="0" cy="32" rx="9" ry="20"/>
+            <ellipse cx="32" cy="0" rx="20" ry="9"/>
+            <ellipse cx="-32" cy="0" rx="20" ry="9"/>
+            <ellipse cx="22" cy="-22" rx="9" ry="20" transform="rotate(45 22 -22)"/>
+            <ellipse cx="-22" cy="22" rx="9" ry="20" transform="rotate(45 -22 22)"/>
+            <ellipse cx="22" cy="22" rx="9" ry="20" transform="rotate(-45 22 22)"/>
+            <ellipse cx="-22" cy="-22" rx="9" ry="20" transform="rotate(-45 -22 -22)"/>
+          </g>
+          <circle cx="0" cy="0" r="18" fill="#6B4226"/>
+        </g>
+      </svg>
+      <svg class="sunflower-hero s2" viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg">
+        <line x1="50" y1="70" x2="50" y2="140" stroke="#4a7a3d" stroke-width="5"/>
+        <g transform="translate(50,55)">
+          <g fill="#F2B705">
+            <ellipse cx="0" cy="-32" rx="10" ry="22"/>
+            <ellipse cx="0" cy="32" rx="10" ry="22"/>
+            <ellipse cx="32" cy="0" rx="22" ry="10"/>
+            <ellipse cx="-32" cy="0" rx="22" ry="10"/>
+            <ellipse cx="22" cy="-22" rx="10" ry="22" transform="rotate(45 22 -22)"/>
+            <ellipse cx="-22" cy="22" rx="10" ry="22" transform="rotate(45 -22 22)"/>
+            <ellipse cx="22" cy="22" rx="10" ry="22" transform="rotate(-45 22 22)"/>
+            <ellipse cx="-22" cy="-22" rx="10" ry="22" transform="rotate(-45 -22 -22)"/>
+          </g>
+          <circle cx="0" cy="0" r="20" fill="#6B4226"/>
+        </g>
+      </svg>
+      <svg class="sunflower-hero s3" viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg">
+        <line x1="50" y1="70" x2="50" y2="140" stroke="#4a7a3d" stroke-width="4"/>
+        <g transform="translate(50,55)">
+          <g fill="#F2B705">
+            <ellipse cx="0" cy="-30" rx="8" ry="18"/>
+            <ellipse cx="0" cy="30" rx="8" ry="18"/>
+            <ellipse cx="30" cy="0" rx="18" ry="8"/>
+            <ellipse cx="-30" cy="0" rx="18" ry="8"/>
+            <ellipse cx="21" cy="-21" rx="8" ry="18" transform="rotate(45 21 -21)"/>
+            <ellipse cx="-21" cy="21" rx="8" ry="18" transform="rotate(45 -21 21)"/>
+            <ellipse cx="21" cy="21" rx="8" ry="18" transform="rotate(-45 21 21)"/>
+            <ellipse cx="-21" cy="-21" rx="8" ry="18" transform="rotate(-45 -21 -21)"/>
+          </g>
+          <circle cx="0" cy="0" r="16" fill="#6B4226"/>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <section class="card-row">
+    <a href="letter.html" class="mini-card paper-card">
+      <span class="emoji">💌</span>
+      <h3>The Letter</h3>
+      <p>An actual handwritten-style letter, sealed with wax. Break it open.</p>
+    </a>
+    <a href="sunflowers.html" class="mini-card paper-card">
+      <span class="emoji">🌻</span>
+      <h3>Sunflower Field</h3>
+      <p>Click every flower. Each one's hiding a reason you're stuck with me.</p>
+    </a>
+    <a href="jojo.html" class="mini-card paper-card">
+      <span class="emoji">🎧</span>
+      <h3>Her Playlist</h3>
+      <p>Isharey, Joji, and everything else that plays in that dim, quiet room in your head.</p>
+    </a>
+    <a href="brownies.html" class="mini-card paper-card">
+      <span class="emoji">🍫</span>
+      <h3>The 10/10 Archive</h3>
+      <p>Official records of every brownie and moment I've ever rated perfect with you.</p>
+    </a>
+    <a href="moments.html" class="mini-card paper-card">
+      <span class="emoji">🌙</span>
+      <h3>Our Moments</h3>
+      <p>Biryani, metro rides, video calls before sleep — the real stuff, kept somewhere safe.</p>
+    </a>
+    <a href="poem.html" class="mini-card paper-card">
+      <span class="emoji">🌊</span>
+      <h3>For You</h3>
+      <p>A poem, because some things are easier to write than to say out loud.</p>
+    </a>
+    <a href="wish.html" class="mini-card paper-card">
+      <span class="emoji">🕯️</span>
+      <h3>Make a Wish</h3>
+      <p>Blow out the candle. Confetti. Feelings. The whole ceremony.</p>
+    </a>
+    <div class="mini-card paper-card" style="cursor:default;">
+      <span class="emoji">😌</span>
+      <h3>You, today</h3>
+      <p>Officially one year closer to being as old as you act at 9pm.</p>
+    </div>
+  </section>
+
+  <section class="intro-note paper-card">
+    <p>"Blue like your favourite hoodie, yellow like a field you'd definitely make me stop the car for, and a whole lot of us — happy birthday, Vasvi. This one's a 10/10 already."</p>
+  </section>
+</main>
+
+<footer class="site-footer">made with a little too much love — Sahil 🌻</footer>
+
+</body>
+</html>

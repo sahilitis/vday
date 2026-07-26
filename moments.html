@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Moments — Vasvi's Day</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  .page-head{ text-align:center; margin-bottom:0.5rem; }
+  .page-head h1{ font-size:clamp(2.2rem,5vw,3.2rem); }
+  .page-head p{ font-family:'Quicksand',sans-serif; opacity:0.8; max-width:56ch; margin:0.4rem auto 0; }
+
+  .timeline{
+    position:relative;
+    max-width:720px;
+    margin:3rem auto 0;
+    padding-left:2.2rem;
+  }
+  .timeline::before{
+    content:"";
+    position:absolute;
+    left:6px;
+    top:6px;
+    bottom:6px;
+    width:2px;
+    background:repeating-linear-gradient(to bottom, var(--blue-lt) 0, var(--blue-lt) 8px, transparent 8px, transparent 14px);
+  }
+  .moment{
+    position:relative;
+    margin-bottom:2.4rem;
+    padding:1.6rem 1.8rem;
+    animation:fadeUp .6s ease both;
+  }
+  .moment::before{
+    content:"";
+    position:absolute;
+    left:-2.05rem;
+    top:1.7rem;
+    width:14px;
+    height:14px;
+    border-radius:50%;
+    background:var(--blue);
+    border:3px solid var(--paper);
+    box-shadow:0 0 0 2px var(--blue-lt);
+  }
+  @keyframes fadeUp{
+    from{ opacity:0; transform:translateY(16px); }
+    to{ opacity:1; transform:translateY(0); }
+  }
+  .moment .tag{
+    font-family:'Quicksand',sans-serif;
+    font-size:0.7rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    font-weight:700;
+    color:var(--blue);
+  }
+  .moment h3{
+    font-size:1.75rem;
+    margin:0.3rem 0 0.5rem;
+  }
+  .moment p{
+    font-family:'Homemade Apple', cursive;
+    font-size:1.3rem;
+    color:var(--ink);
+    line-height:1.55;
+    margin:0;
+  }
+  .moment .mini-stamp{
+    position:absolute;
+    top:1.2rem;
+    right:1.2rem;
+    width:58px; height:58px;
+    font-size:1rem;
+  }
+  .moment.bittersweet{
+    background:linear-gradient(135deg, var(--paper2), #eee3cd);
+  }
+  .moment.bittersweet::before{ background:var(--blush); box-shadow:0 0 0 2px #f6c9c6; }
+
+  .rewind-note{
+    max-width:640px;
+    margin:1rem auto 3rem;
+    padding:2rem 2.2rem;
+    text-align:center;
+  }
+  .rewind-note p{
+    font-family:'Homemade Apple', cursive;
+    font-size:1.4rem;
+    color:var(--ink);
+    line-height:1.6;
+    margin:0;
+  }
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="index.html" class="brand">🌻 Vasvi's Day</a>
+  <ul>
+    <li><a class="nav-link" href="index.html">Home</a></li>
+    <li><a class="nav-link" href="letter.html">The Letter</a></li>
+    <li><a class="nav-link active" href="moments.html">Our Moments</a></li>
+    <li><a class="nav-link" href="sunflowers.html">Sunflower Field</a></li>
+    <li><a class="nav-link" href="jojo.html">Her Playlist</a></li>
+    <li><a class="nav-link" href="brownies.html">10/10 Archive</a></li>
+    <li><a class="nav-link" href="poem.html">For You</a></li>
+    <li><a class="nav-link" href="wish.html">Make a Wish</a></li>
+  </ul>
+</nav>
+
+<main>
+  <div class="page-head">
+    <p class="eyebrow">a small, real timeline</p>
+    <h1>Our Moments 🌙</h1>
+    <p>Not everything needs a joke attached. Some of it just needs to be remembered properly.</p>
+  </div>
+
+  <div class="timeline">
+
+    <div class="moment paper-card">
+      <div class="mini-stamp stamp">10/10<span></span></div>
+      <span class="tag">Wednesday — our day</span>
+      <h3>Kalsang momos, Wongdhen dessert after</h3>
+      <p>Just a Wednesday, technically. But it's become our day, and momos followed by dessert with you turned an ordinary evening into one I keep replaying.</p>
+    </div>
+
+    <div class="moment paper-card">
+      <div class="mini-stamp stamp">10/10<span></span></div>
+      <span class="tag">Andhra Bhavan</span>
+      <h3>The biryani you swore by</h3>
+      <p>You picked the place, you picked the order, and you were right about all of it. Watching you eat something you actually love is its own kind of good day.</p>
+    </div>
+
+    <div class="moment bittersweet paper-card">
+      <span class="tag">Still pending</span>
+      <h3>The tea and biscuits that never happened</h3>
+      <p>We planned it so casually, like it would just happen on its own. It didn't. It's still owed — one quiet cup of tea, no rush, no reason. I haven't forgotten.</p>
+    </div>
+
+    <div class="moment paper-card">
+      <div class="mini-stamp stamp">10/10<span></span></div>
+      <span class="tag">Metro to airport, that whole week</span>
+      <h3>The week I'd rewind if I could</h3>
+      <p>Uncertain, a little nervous, and somehow still one of the strongest weeks I've felt anything. If I could go back and just sit in it a little longer, I would, every time.</p>
+    </div>
+
+    <div class="moment paper-card">
+      <div class="mini-stamp stamp">10/10<span></span></div>
+      <span class="tag">Every night, without fail</span>
+      <h3>The video calls before sleep</h3>
+      <p>Some people count sheep. I just wait for the call. Whatever the day was, it gets quieter and better the second your face shows up on screen.</p>
+    </div>
+
+    <div class="moment paper-card">
+      <div class="mini-stamp stamp">10/10<span></span></div>
+      <span class="tag">The first time, and every time since</span>
+      <h3>Holding your hand for the first time</h3>
+      <p>That was the exact moment it stopped being casual for me. And every hug after that has somehow topped the one before it — which shouldn't be possible, but here we are.</p>
+    </div>
+
+    <div class="moment paper-card">
+      <span class="tag">The quiet kind</span>
+      <h3>The battles you fight without saying a word</h3>
+      <p>You carry more than you let on, and you rarely ask for help carrying it. I see it anyway. I'm not going anywhere.</p>
+    </div>
+
+  </div>
+
+  <div class="page-head" style="margin-top:1rem;">
+    <p class="eyebrow">not memories yet — just things I'm manifesting</p>
+    <h1 style="font-size:2rem;">Still to Come, Hopefully 🌱</h1>
+    <p>These haven't happened. I just think about them enough that they deserved a spot here too.</p>
+  </div>
+
+  <div class="timeline">
+    <div class="moment bittersweet paper-card">
+      <span class="tag">Manifesting</span>
+      <h3>That tea and biscuits, finally happening</h3>
+      <p>Still owed. Still coming, eventually, no rush.</p>
+    </div>
+
+    <div class="moment bittersweet paper-card">
+      <div class="mini-stamp stamp">10/10<span></span></div>
+      <span class="tag">A dream, not a memory</span>
+      <h3>You interning, me handling the chores</h3>
+      <p>Living together, both figuring out our own version of adult life, in the same space. You've dreamed about it out loud more than once. So have I.</p>
+    </div>
+
+    <div class="moment bittersweet paper-card">
+      <div class="mini-stamp stamp">10/10<span></span></div>
+      <span class="tag">A dream, not a memory</span>
+      <h3>The late-night car date, just for cravings</h3>
+      <p>Driving out for no reason except hunger and each other's company, and a hug at the end of the night that neither of us wants to end. I've manifested this one hard.</p>
+    </div>
+  </div>
+
+  <section class="rewind-note paper-card">
+    <p>Some of this made me laugh. Some of it I'd give a lot to relive exactly as it was. And some of it hasn't happened yet — but I'm working on it. All of it is why this whole site exists in the first place.</p>
+  </section>
+</main>
+
+<footer class="site-footer">read the <a href="poem.html">poem</a> next 🌊</footer>
+
+</body>
+</html>

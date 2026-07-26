@@ -1,0 +1,252 @@
+/* ===========================================================
+   Vasvi's Birthday Site — Design Tokens
+   Palette:
+     --paper:   #FBF6EA  (warm cream paper)
+     --paper2:  #F4ECD8  (deeper paper / kraft)
+     --blue:    #2F5D8A  (her favourite — cornflower/denim blue)
+     --blue-dk: #1E3E5C
+     --blue-lt: #A9C8E0
+     --sun:     #F2B705  (sunflower yellow)
+     --sun-dk:  #C98A02
+     --brown:   #6B4226  (brownie / chocolate)
+     --blush:   #F0938E  (warm accent, wax seal / stamp red-pink)
+     --ink:     #24344A  (near-navy ink for handwriting)
+   Type:
+     display/handwriting - 'Caveat'
+     accent script (letter body) - 'Homemade Apple'
+     body/utility - 'Quicksand'
+   =========================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Homemade+Apple&family=Quicksand:wght@400;500;600;700&display=swap');
+
+:root{
+  --paper:#FBF6EA;
+  --paper2:#F4ECD8;
+  --blue:#2F5D8A;
+  --blue-dk:#1E3E5C;
+  --blue-lt:#A9C8E0;
+  --sun:#F2B705;
+  --sun-dk:#C98A02;
+  --brown:#6B4226;
+  --blush:#F0938E;
+  --ink:#24344A;
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+
+body{
+  margin:0;
+  min-height:100vh;
+  background:
+    radial-gradient(circle at 8% 12%, rgba(47,93,138,0.06), transparent 40%),
+    radial-gradient(circle at 92% 85%, rgba(242,183,5,0.10), transparent 45%),
+    var(--paper);
+  background-attachment:fixed;
+  color:var(--ink);
+  font-family:'Quicksand', sans-serif;
+  position:relative;
+  overflow-x:hidden;
+}
+
+/* subtle paper grain via layered noise-ish texture */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(36,52,74,0.015) 0px, transparent 2px, transparent 4px),
+    repeating-linear-gradient(90deg, rgba(36,52,74,0.012) 0px, transparent 2px, transparent 4px);
+  opacity:0.6;
+}
+
+h1,h2,h3, .script{
+  font-family:'Caveat', cursive;
+  color:var(--blue-dk);
+  margin:0;
+}
+
+a{color:var(--blue);}
+
+/* ---------- Nav ---------- */
+.site-nav{
+  position:sticky;
+  top:0;
+  z-index:50;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  padding:0.9rem 1.5rem;
+  background:rgba(251,246,234,0.85);
+  backdrop-filter:blur(6px);
+  border-bottom:2px dashed var(--blue-lt);
+  flex-wrap:wrap;
+}
+.site-nav .brand{
+  font-family:'Caveat', cursive;
+  font-size:1.7rem;
+  font-weight:700;
+  color:var(--blue-dk);
+  text-decoration:none;
+  display:flex;
+  align-items:center;
+  gap:0.4rem;
+}
+.site-nav ul{
+  list-style:none;
+  display:flex;
+  gap:0.4rem 0.2rem;
+  padding:0;
+  margin:0;
+  flex-wrap:wrap;
+}
+.site-nav a.nav-link{
+  text-decoration:none;
+  color:var(--blue-dk);
+  font-family:'Quicksand', sans-serif;
+  font-weight:600;
+  font-size:0.85rem;
+  padding:0.45rem 0.8rem;
+  border-radius:999px;
+  transition:background .2s ease, color .2s ease, transform .15s ease;
+  white-space:nowrap;
+}
+.site-nav a.nav-link:hover{
+  background:var(--blue);
+  color:#fff;
+  transform:translateY(-1px);
+}
+.site-nav a.nav-link.active{
+  background:var(--sun);
+  color:var(--blue-dk);
+}
+
+main{
+  position:relative;
+  z-index:1;
+  max-width:1100px;
+  margin:0 auto;
+  padding:2.5rem 1.5rem 5rem;
+}
+
+/* ---------- Reusable paper card ---------- */
+.paper-card{
+  background:var(--paper2);
+  border-radius:6px;
+  box-shadow:0 10px 30px rgba(30,62,92,0.12), 0 2px 6px rgba(30,62,92,0.08);
+  position:relative;
+}
+.paper-card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:6px;
+  box-shadow:inset 0 0 0 1px rgba(107,66,38,0.06);
+  pointer-events:none;
+}
+
+/* washi tape */
+.tape{
+  position:absolute;
+  width:90px;
+  height:28px;
+  background:repeating-linear-gradient(45deg, var(--blue-lt), var(--blue-lt) 6px, #cfe0ee 6px, #cfe0ee 12px);
+  opacity:0.85;
+  box-shadow:0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* stamp badge - the signature 10/10 motif */
+.stamp{
+  --stamp-color: var(--blush);
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:86px;
+  height:86px;
+  border-radius:50%;
+  border:3px solid var(--stamp-color);
+  color:var(--stamp-color);
+  font-family:'Caveat', cursive;
+  font-weight:700;
+  font-size:1.55rem;
+  transform:rotate(-12deg);
+  position:relative;
+  text-align:center;
+  line-height:1.05;
+  mix-blend-mode:multiply;
+  opacity:0.92;
+  user-select:none;
+}
+.stamp::before{
+  content:"";
+  position:absolute;
+  inset:-6px;
+  border-radius:50%;
+  border:1px solid var(--stamp-color);
+  opacity:0.6;
+}
+.stamp span{display:block; font-size:0.62rem; letter-spacing:0.12em; font-family:'Quicksand',sans-serif; font-weight:700; text-transform:uppercase;}
+
+.btn{
+  display:inline-block;
+  font-family:'Quicksand', sans-serif;
+  font-weight:700;
+  font-size:1rem;
+  padding:0.8rem 1.6rem;
+  border-radius:999px;
+  background:var(--blue);
+  color:#fff;
+  text-decoration:none;
+  border:none;
+  cursor:pointer;
+  box-shadow:0 6px 16px rgba(47,93,138,0.35);
+  transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
+}
+.btn:hover{
+  transform:translateY(-2px) scale(1.02);
+  box-shadow:0 10px 22px rgba(47,93,138,0.42);
+  background:var(--blue-dk);
+}
+.btn.sun{
+  background:var(--sun);
+  color:var(--blue-dk);
+  box-shadow:0 6px 16px rgba(201,138,2,0.35);
+}
+.btn.sun:hover{ background:var(--sun-dk); color:#fff; }
+
+.eyebrow{
+  font-family:'Quicksand',sans-serif;
+  text-transform:uppercase;
+  letter-spacing:0.18em;
+  font-size:0.72rem;
+  font-weight:700;
+  color:var(--blue);
+}
+
+footer.site-footer{
+  text-align:center;
+  padding:2rem 1rem 3rem;
+  font-family:'Caveat', cursive;
+  font-size:1.3rem;
+  color:var(--blue-dk);
+  opacity:0.85;
+}
+
+@media (max-width:640px){
+  .site-nav{padding:0.7rem 1rem;}
+  .site-nav ul{gap:0.2rem;}
+  .site-nav a.nav-link{font-size:0.75rem; padding:0.35rem 0.6rem;}
+}
+
+/* reduced motion */
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; }
+}
+
+:focus-visible{
+  outline:3px solid var(--blue);
+  outline-offset:2px;
+}
