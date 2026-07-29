@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sunflower Field — Vasvi's Day</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  .page-head{ text-align:center; margin-bottom:1rem; }
+  .page-head h1{ font-size:clamp(2.2rem,5vw,3.2rem); }
+  .page-head p{ font-family:'Quicksand',sans-serif; opacity:0.8; max-width:50ch; margin:0.4rem auto 0; }
+
+  .field{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(140px, 1fr));
+    gap:1.6rem;
+    margin-top:2.5rem;
+  }
+
+  .flower-slot{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    cursor:pointer;
+    background:none;
+    border:none;
+    padding:0.6rem;
+    font-family:inherit;
+  }
+  .flower-slot svg{
+    width:100px;
+    height:130px;
+    transition:transform .25s ease, filter .25s ease;
+  }
+  .flower-slot:hover svg{
+    transform:scale(1.08) rotate(-3deg);
+    filter:drop-shadow(0 8px 14px rgba(201,138,2,0.35));
+  }
+  .flower-slot.picked svg{
+    transform:scale(0.94) rotate(6deg);
+    filter:grayscale(0.55) opacity(0.55);
+  }
+  .flower-label{
+    margin-top:0.5rem;
+    font-family:'Caveat', cursive;
+    font-size:1.1rem;
+    color:var(--blue-dk);
+  }
+
+  .reveal-zone{
+    margin-top:3rem;
+    min-height:160px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .reason-card{
+    max-width:560px;
+    padding:2rem 2.2rem;
+    text-align:center;
+    position:relative;
+    animation: pop .4s ease;
+  }
+  @keyframes pop{
+    0%{ transform:scale(0.85); opacity:0; }
+    100%{ transform:scale(1); opacity:1; }
+  }
+  .reason-card p{
+    font-family:'Homemade Apple', cursive;
+    font-size:1.6rem;
+    color:var(--ink);
+    line-height:1.5;
+    margin:0;
+  }
+  .reason-count{
+    font-family:'Quicksand',sans-serif;
+    font-size:0.85rem;
+    color:var(--blue);
+    text-align:center;
+    margin-top:2rem;
+    font-weight:700;
+  }
+  .placeholder-text{
+    font-family:'Caveat', cursive;
+    font-size:1.4rem;
+    color:var(--blue-lt);
+    text-align:center;
+  }
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="index.html" class="brand">🌻 Vasvi's Day</a>
+  <ul>
+    <li><a class="nav-link" href="index.html">Home</a></li>
+    <li><a class="nav-link" href="letter.html">The Letter</a></li>
+    <li><a class="nav-link" href="moments.html">Our Moments</a></li>
+    <li><a class="nav-link active" href="sunflowers.html">Sunflower Field</a></li>
+    <li><a class="nav-link" href="jojo.html">Her Playlist</a></li>
+    <li><a class="nav-link" href="brownies.html">10/10 Archive</a></li>
+    <li><a class="nav-link" href="poem.html">For You</a></li>
+    <li><a class="nav-link" href="wish.html">Make a Wish</a></li>
+  </ul>
+</nav>
+
+<main>
+  <div class="page-head">
+    <p class="eyebrow">tap every flower</p>
+    <h1>The Sunflower Field 🌻</h1>
+    <p>Ten flowers, ten reasons. Yes, you have to click all of them, this isn't optional.</p>
+  </div>
+
+  <div class="field" id="field"></div>
+
+  <div class="reveal-zone" id="revealZone">
+    <p class="placeholder-text">pick a flower, any flower ☝️</p>
+  </div>
+
+  <p class="reason-count" id="counter">0 / 10 picked</p>
+</main>
+
+<footer class="site-footer">still here? go turn on the Joji radio 🎤</footer>
+
+<script>
+const reasons = [
+  "You'll play a Joji track and call it 'nothing,' when really it's the only way you let anyone hear what you're not saying.",
+  "You keep the world one arm's length away, and then let a handful of people all the way in. I still can't believe I made that very short list.",
+  "You'll never ask for reassurance out loud — you just go a little quiet, and somehow I always know exactly when you need it.",
+  "You're the calm kind of blue on the surface, with whole storms underneath that nobody else ever clocks.",
+  "You'd start a small war over the last brownie, and honestly, I'd hand mine over before you even asked.",
+  "You recommended Andhra Bhavan like your reputation was on the line. It was a 10/10. You were right, obviously.",
+  "That whole uncertain week of metro rides to the airport — somehow one of the strongest weeks I've ever felt anything.",
+  "Every video call before sleep turns the entire day around, even the bad ones.",
+  "The first time I held your hand, I knew. Every hug since has topped the one before it, and I don't know how you keep doing that.",
+  "You carry more than you let on and rarely ask for help carrying it. I see it anyway. I'm not going anywhere."
+];
+
+const field = document.getElementById('field');
+const revealZone = document.getElementById('revealZone');
+const counter = document.getElementById('counter');
+let pickedCount = 0;
+const pickedSet = new Set();
+
+function sunflowerSVG(){
+  return `
+  <svg viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg">
+    <line x1="50" y1="70" x2="50" y2="140" stroke="#4a7a3d" stroke-width="4"/>
+    <path d="M50 100 Q35 95 32 108" stroke="#4a7a3d" stroke-width="3" fill="none"/>
+    <g transform="translate(50,55)">
+      <g fill="#F2B705">
+        <ellipse cx="0" cy="-32" rx="9" ry="20"/>
+        <ellipse cx="0" cy="32" rx="9" ry="20"/>
+        <ellipse cx="32" cy="0" rx="20" ry="9"/>
+        <ellipse cx="-32" cy="0" rx="20" ry="9"/>
+        <ellipse cx="22" cy="-22" rx="9" ry="20" transform="rotate(45 22 -22)"/>
+        <ellipse cx="-22" cy="22" rx="9" ry="20" transform="rotate(45 -22 22)"/>
+        <ellipse cx="22" cy="22" rx="9" ry="20" transform="rotate(-45 22 22)"/>
+        <ellipse cx="-22" cy="-22" rx="9" ry="20" transform="rotate(-45 -22 -22)"/>
+      </g>
+      <circle cx="0" cy="0" r="18" fill="#6B4226"/>
+      <circle cx="0" cy="0" r="18" fill="url(#seedPattern)" opacity="0.3"/>
+    </g>
+  </svg>`;
+}
+
+reasons.forEach((reason, i) => {
+  const slot = document.createElement('button');
+  slot.className = 'flower-slot';
+  slot.innerHTML = sunflowerSVG() + `<span class="flower-label">#${i+1}</span>`;
+  slot.addEventListener('click', () => {
+    revealZone.innerHTML = `<div class="reason-card paper-card"><p>${reason}</p></div>`;
+    if(!pickedSet.has(i)){
+      pickedSet.add(i);
+      slot.classList.add('picked');
+      pickedCount++;
+      counter.textContent = pickedCount + ' / 10 picked';
+      if(pickedCount === 10){
+        counter.textContent = "10 / 10 — fitting, isn't it? 🌻";
+      }
+    }
+  });
+  field.appendChild(slot);
+});
+</script>
+
+</body>
+</html>
